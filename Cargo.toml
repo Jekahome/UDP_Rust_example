@@ -1,0 +1,19 @@
+[package]
+name = "udp"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+default-run = "udp-server"
+
+[[bin]]
+name = "udp-server"
+path = "src/server.rs"
+
+[[bin]]
+name = "udp-client"
+path = "src/client.rs"
+
+[dependencies]
+ansi_term = "0.12"
