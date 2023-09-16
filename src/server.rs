@@ -2,12 +2,17 @@
 use std::net::UdpSocket;
 use std::net::SocketAddr;
 
+use std::fs;
+use std::io;
+use std::io::prelude::*;
+use std::io::{BufReader};
+
 // cargo run --bin udp-server <server> 
 // cargo run --bin udp-server localhost:34254
 fn main() -> std::io::Result<()>{
  
     // Settings
-    let mut base_server_addr:String = "localhost:34254".to_string();
+    let mut base_server_addr:String = "127.0.0.1:34254".to_string();
     if std::env::args().len() > 1 {
          let args: Vec<String> = std::env::args().collect(); 
          base_server_addr = args[1].clone();
@@ -32,8 +37,24 @@ fn main() -> std::io::Result<()>{
                     print!("Read {} bytes ", number_of_bytes_read);
                     //println!("with msg:{}", String::from_utf8(buf.to_vec()).unwrap());
                     // TX
-                    buf.reverse();
-                    sock.send_to(&buf, &client_addr).expect("error sending");
+                    //buf.reverse();
+                    //sock.send_to(&buf, &client_addr).expect("error sending");
+                    //----------------------------------------------------------------
+                    let f = fs::File::open("source/video.mp4").unwrap();
+                    let mut reader = BufReader::new(f);
+                    let mut buffer = [0; 4096*2];
+                
+                    loop{println!(".");
+                        if let Ok(n) = reader.read(&mut buffer[..]){
+                            println!("N:{n}");
+                            sock.send_to(&buffer/*[..n]*/, &client_addr).expect("error sending");
+                        }else{
+                            println!("Err");
+                            break;
+                        }
+                    }
+                    //----------------------------------------------------------------
+
                 });
             },
             Ok((_, SocketAddr::V6(_))) => { eprintln!("Used only IPv4");},
@@ -43,3 +64,5 @@ fn main() -> std::io::Result<()>{
         }
     }
 }
+// udp://192.168.1.77:34254
+// udp://127.0.0.1:34254

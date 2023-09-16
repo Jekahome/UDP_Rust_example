@@ -15,5 +15,18 @@ path = "src/server.rs"
 name = "udp-client"
 path = "src/client.rs"
 
+[[bin]]
+name = "fast-udp-receiver"
+path = "src/bin/receiver.rs"
+
+[[bin]]
+name = "fast-udp-sender"
+path = "src/bin/sender.rs"
+
 [dependencies]
 ansi_term = "0.12"
+ll-udp-pubsub = {path="../ll-udp-pubsub"}
+
+
+clap = { version = "4", features = ["derive", "env"] }
+env_logger = "0.10"

@@ -30,6 +30,17 @@
  > Более серьёзной потенциальной проблемой является то, что в отличие от TCP, основанные на UDP приложения не обязательно имеют хорошие механизмы контроля и избегания перегрузок.  
  > Чувствительные к перегрузкам UDP-приложения, которые потребляют значительную часть доступной пропускной способности, могут поставить под угрозу стабильность в Интернете.
 
+
+
+# UDP pubsub channel with minimum latency
+
+For IoT, Video Streaming, other realtime applications
+
+[ll-udp-pubsub](https://github.com/dunnock/ll-udp-pubsub/tree/main/examples)
+[Low latency backend UDP pub sub](https://www.youtube.com/watch?v=MLll2T7LTj0)
+
+
+
  ## Links
 
  [Rust doc std::net](https://doc.rust-lang.org/std/net/index.html) 
